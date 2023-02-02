@@ -1,0 +1,1 @@
+let N = Int(readLine()!)!;var dp=[Int](repeating:0,count:N+1);readLine()!.split{$0==" "}.map{Int($0)!}.forEach{dp[$0]=dp[$0-1]+1};print(N-dp.max()!)
