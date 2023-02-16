@@ -8,8 +8,6 @@ int ans;
 vector<int> g[51];
 
 void dfs(int node) {
-    if (node == rmv)
-        return;
     if (g[node].empty()) {
         ans++;
         return;
@@ -35,7 +33,8 @@ int main() {
             g[i].erase(idx);
     }
     
-    dfs(root);
+    if (rmv != root)
+        dfs(root);
     
     cout << ans;
 }
