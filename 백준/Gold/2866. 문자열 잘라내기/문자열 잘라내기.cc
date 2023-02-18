@@ -1,17 +1,18 @@
 #include <iostream>
-#include <unordered_set>
+#include <vector>
+#include <algorithm>
 #define FIO ios::sync_with_stdio(0), cin.tie(0), cout.tie(0);
 using namespace std;
 
-int r, c, cnt;
+int r, c, ans;
 string g[1001];
-unordered_set<string> s;
+vector<string> sv;
 
-void contains(const unordered_set<string>& us, const string& str) {
-    if (us.find(str) != us.end()) {
-        cout << cnt;
-        exit(0);
-    }
+int cmnLen(const string& x, const string& y) {
+    for (int i=0; i<x.size(); i++)
+        if (x[i] != y[i])
+            return i;
+    return r;
 }
 
 int main() {
@@ -23,20 +24,14 @@ int main() {
         string temp;
         for (int j=r-1; j>=0; j--)
             temp += g[j][i];
-        contains(s, temp);
-        s.insert(temp);
+        sv.push_back(temp);
+    }
+    
+    sort(sv.begin(),sv.end());
+    
+    for (int i=1; i<c; i++) {
+        ans = max(ans, cmnLen(sv[i], sv[i-1]));
     }
 
-    for (int i=0; i<r; i++) {
-        unordered_set<string> temp;
-        for (string str: s) {
-            str.pop_back();
-            contains(temp, str);
-            temp.insert(str);
-        }
-        s = temp;
-        cnt++;
-    }
-
-    cout << cnt;
+    cout << r-ans-1;
 }
