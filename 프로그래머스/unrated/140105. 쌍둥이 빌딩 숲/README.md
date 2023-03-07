@@ -1,10 +1,10 @@
 # [unrated] 쌍둥이 빌딩 숲 - 140105 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/140105?language=javascript) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/140105) 
 
 ### 성능 요약
 
-메모리: 46.3 MB, 시간: 1.98 ms
+메모리: 4.06 MB, 시간: 0.09 ms
 
 ### 구분
 
