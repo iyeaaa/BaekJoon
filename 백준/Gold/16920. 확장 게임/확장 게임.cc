@@ -38,41 +38,32 @@ int main() {
 
     int idx = 1;
     while (!isEnd()) {
-        int stt = !q[idx].empty() ? vst[q[idx].back().first][q[idx].back().second] : 0;
-        queue<pair<int, int>> newQ;
+        f(_, 0, s[idx]) {
+            if (q[idx].empty())
+                goto isEmpty;
 
-        while (!q[idx].empty()) {
-            auto [y, x] = q[idx].front();
-            q[idx].pop();
+            int len = q[idx].size();
+            f(__, 0, len) {
+                auto [y, x] = q[idx].front();
+                q[idx].pop();
+                f(i, 0, 4) {
+                    int ny = y + dy[i];
+                    int nx = x + dx[i];
 
-            if (vst[y][x] - stt == s[idx])
-                break;
+                    if (!isRange(ny, nx))
+                        continue;
 
-            f(i, 0, 4) {
-                int ny = y + dy[i];
-                int nx = x + dx[i];
+                    if (vst[ny][nx] != -1 || g[ny][nx] == '#')
+                        continue;
 
-                if (!isRange(ny, nx))
-                    continue;
-
-                if (vst[ny][nx] != -1 || g[ny][nx] == '#')
-                    continue;
-
-                q[idx].push({ny, nx});
-                newQ.push({ny, nx});
-                vst[ny][nx] = vst[y][x] + 1;
-                ans[idx]++;
+                    q[idx].push({ny, nx});
+                    vst[ny][nx] = vst[y][x] + 1;
+                    ans[idx]++;
+                }
             }
         }
 
-        q[idx] = newQ;
-        while (!newQ.empty()) {
-            auto [y, x] = newQ.front();
-            newQ.pop();
-            vst[y][x] = 1;
-        }
-
-        idx = idx == p ? 1 : idx + 1;
+        isEmpty: idx = idx == p ? 1 : idx + 1;
     }
 
     f(i, 1, p + 1) cout << ans[i] << ' ';
