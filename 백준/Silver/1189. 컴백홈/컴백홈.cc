@@ -8,8 +8,8 @@ vector<string> stk;
 const int dy[] = {-1, 0, 1, 0};
 const int dx[] = {0, -1, 0, 1};
 
-void f(int y, int x, int d, string s) {
-    if (d == k && y == 0 && x == c - 1) ans++, stk.push_back(s);
+void f(int y, int x, int d) {
+    if (d == k && y == 0 && x == c - 1) ans++;
     if (d == k) return;
     fr (i, 0, 4) {
         int ny = y + dy[i];
@@ -17,7 +17,7 @@ void f(int y, int x, int d, string s) {
         if (ny < 0 || ny >= r || nx < 0 || nx >= c) continue;
         if (v[ny][nx] || g[ny][nx] == 'T') continue;
         v[ny][nx] = true;
-        f(ny, nx, d + 1, s+to_string(ny) + to_string(nx) + " ");
+        f(ny, nx, d + 1);
         v[ny][nx] = false;
     }
 }
@@ -35,6 +35,6 @@ int main() {
 
 
     v[r-1][0] = true;
-    f(r - 1, 0, 1, to_string(r-1) + to_string(0) + " ");
+    f(r - 1, 0, 1);
     cout << ans;
 }
