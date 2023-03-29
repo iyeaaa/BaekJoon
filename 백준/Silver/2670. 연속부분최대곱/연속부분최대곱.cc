@@ -1,26 +1,19 @@
-#include <cstdio>
-#include <algorithm>
+#include <bits/stdc++.h>
+
+#define f(i, l, r) for(int i=l;i<r;i++)
 using namespace std;
 
 int n;
-double arr[10001];
-double ans = 0;
+double a[10001], dp[10001], ans;
 
-int main()
-{
-    scanf("%d", &n);
-    for (int i = 1; i <= n; ++i)
-        scanf("%lf", &arr[i]);
+int main() {
+    ios::sync_with_stdio(false), cin.tie(0), cout.tie(0);
 
-    ans = arr[1];
+    cin >> n;
+    f(i, 0, n) cin >> a[i];
 
-    for (int i = 2; i <= n; ++i) {
-        if (arr[i] * arr[i - 1] >= arr[i]) {
-            arr[i] = arr[i - 1] * arr[i];
-        }
-        ans = max(ans, arr[i]);
-    }
+    dp[0] = a[0], ans = a[0];
+    f(i, 1, n) dp[i] = max(a[i], dp[i - 1] * a[i]), ans = max(ans, dp[i]);
 
-    printf("%.3lf", ans);
-    return 0;
+    printf("%.3f", ans);
 }
