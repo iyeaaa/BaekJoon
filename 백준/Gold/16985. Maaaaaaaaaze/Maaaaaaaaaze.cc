@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 
-#define fr(i, l, r) for(int i=l;i<r;i++)
+#define F(i, l, r) for(int i=l;i<r;i++)
 using namespace std;
 typedef vector<int> vi;
 
@@ -8,15 +8,15 @@ const int INF = 99999999;
 const int dz[] = {-1, 0, 0, 0, 0, 1};
 const int dy[] = {0, 1, -1, 0, 0, 0};
 const int dx[] = {0, 0, 0, 1, -1, 0};
-vector<vi> blueprint[5];
-vector<vi> qube[5];
+int blueprint[5][5][5];
+int qube[5][5][5];
 int ans = INF;
 int step[5] = {0, 1, 2, 3, 4};
 
 void rotate(int idx) {
-    vector<vi> rtn(5, vi(5));
-    fr(i, 0, 5) fr(j, 0, 5) rtn[j][4 - i] = qube[idx][i][j];
-    qube[idx] = rtn;
+    int rtn[5][5];
+    F(i, 0, 5) F(j, 0, 5) rtn[j][4 - i] = qube[idx][i][j];
+    F(i, 0, 5) F(j, 0, 5) qube[idx][i][j] = rtn[i][j];
 }
 
 bool isRange(int z, int y, int x) {
@@ -24,7 +24,7 @@ bool isRange(int z, int y, int x) {
 }
 
 int minDist() {
-    if (qube[0][0][0] == 0)
+    if (qube[0][0][0] == 0 || qube[4][4][4] == 0)
         return INF;
 
     int vst[5][5][5];
@@ -39,7 +39,7 @@ int minDist() {
         q.pop();
         if (z == 4 && y == 4 && x == 4)
             return vst[z][y][x];
-        fr(i, 0, 6) {
+        F(i, 0, 6) {
             int nz = z + dz[i];
             int ny = y + dy[i];
             int nx = x + dx[i];
@@ -56,20 +56,20 @@ int minDist() {
     return INF;
 }
 
-// O(5! * 5^4 * 5^2 * 5^3) < 2*10^8
+// O(5! * 4^5 * 5^2 * 5^3) < 2*10^8
 int main() {
     ios::sync_with_stdio(false), cin.tie(0), cout.tie(0);
 
-    fr(i, 0, 5) blueprint[i] = vector(5, vi(5));
-    fr(i, 0, 5) fr(j, 0, 5) fr(k, 0, 5) cin >> blueprint[i][j][k];
+    F(i, 0, 5) F(j, 0, 5) F(k, 0, 5) cin >> blueprint[i][j][k];
 
     do {
-        fr(i, 0, 5) qube[i] = blueprint[step[i]];
-        fr(_, 0, 4) {
-            fr(__, 0, 4) {
-                fr(___, 0, 4) {
-                    fr(____, 0, 4) {
-                        fr(_____, 0, 4) {
+        F(i, 0, 5) F(j, 0, 5) F(k, 0, 5)
+            qube[i][j][k] = blueprint[step[i]][j][k];
+        F(_, 0, 4) {
+            F(__, 0, 4) {
+                F(___, 0, 4) {
+                    F(____, 0, 4) {
+                        F(_____, 0, 4) {
                             ans = min(ans, minDist());
                             rotate(4);
                         }
