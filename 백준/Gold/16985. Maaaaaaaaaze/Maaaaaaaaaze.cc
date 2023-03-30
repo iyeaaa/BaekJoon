@@ -1,4 +1,7 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <queue>
+#include <cstring>
+#include <algorithm>
 
 #define F(i, l, r) for(int i=l;i<r;i++)
 using namespace std;
@@ -71,6 +74,10 @@ int main() {
                     F(____, 0, 4) {
                         F(_____, 0, 4) {
                             ans = min(ans, minDist());
+                            if (ans == 12) {
+                                cout << 12;
+                                exit(0);
+                            }
                             rotate(4);
                         }
                         rotate(3);
