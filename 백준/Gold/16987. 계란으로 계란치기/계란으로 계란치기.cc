@@ -12,9 +12,8 @@ bool allBroken(int idx) {
 }
 
 void f(int idx, int sum) {
-    ans = max(ans, sum);
-
     if (idx >= n) {
+        ans = max(ans, sum);
         return;
     }
 
