@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-
+#define FIO ios::sync_with_stdio(false), cin.tie(0), cout.tie(0);
 #define FOR(i, l, r) for (int i = l; i < r; i++)
 using namespace std;
 
@@ -10,6 +10,7 @@ int sy, sx, ey, ex;
 queue<pair<int, int>> q;
 
 int main() {
+    FIO
     fill(&v[0][0], &v[500][501], -1);
     cin >> n >> m >> a >> b >> k;
     FOR(i, 0, k) {
@@ -24,10 +25,6 @@ int main() {
     while (!q.empty()) {
         auto [y, x] = q.front();
         q.pop();
-        if (y == ey && x == ex) {
-            cout << v[y][x];
-            exit(0);
-        }
         FOR(i, 0, 4) {
             int ny = y + dy[i];
             int nx = x + dx[i];
@@ -39,5 +36,5 @@ int main() {
             first:;
         }
     }
-    cout << -1;
+    cout << v[ey][ex];
 }
