@@ -24,6 +24,7 @@ int main() {
         auto [edge, cur] = pq.top();
         pq.pop();
         if (edge > mndist[cur]) continue;
+        if (cur == t) break;
         for (auto [dist, nxt]: g[cur]) {
             if (edge + dist >= mndist[nxt]) continue;
             mndist[nxt] = edge + dist;
